@@ -11,7 +11,6 @@ class CustomDaemon(Daemon):
     def run(self):
         while True:
             logger.info("Daemon is running !")
-            sys.stderr.write("Daemon is running .. \n")
             time.sleep(4)
 
 
@@ -33,7 +32,7 @@ if __name__ == '__main__':
     logger.addHandler(ch)
 
     daemon = CustomDaemon()
-    usageMessage = f"Usage: {sys.argv[0]} (start|stop|restart|status)"
+    message = "Usage: python main.py (start|stop|restart|status)"
     if len(sys.argv) == 2:
         choice = sys.argv[1]
         if choice == "start":
@@ -45,9 +44,9 @@ if __name__ == '__main__':
         elif choice == "status":
             daemon.status()
         else:
-            print(usageMessage)
+            print(message)
             sys.exit(1)
         sys.exit(0)
     else:
-        print(usageMessage)
+        print(message)
         sys.exit(1)
